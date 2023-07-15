@@ -1,4 +1,4 @@
-#include "./HEADER.h"
+#include "../../../HEADER.h"
 
 int main() {
   i64 v, e;
