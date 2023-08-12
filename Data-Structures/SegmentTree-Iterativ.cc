@@ -23,7 +23,7 @@ private:
     int start = len / 2;
     int end = len;
     while (start != 0) {
-      for (int index = start - 1; index < len; index++) {
+      for (int index = start - 1; index < end; index++) {
         this->tree[index] =
             max(this->tree[index * 2], this->tree[index * 2 + 1]);
       }
@@ -45,7 +45,7 @@ public:
     this->tree[pos] = value;
 
     pos = pos / 2;
-    while (pos > 1) {
+    while (pos != 0) {
       this->tree[pos] = max(this->tree[pos * 2], this->tree[pos * 2 + 1]);
       pos /= 2;
     }
@@ -81,6 +81,8 @@ public:
 };
 
 int main() {
+  fast();
+
   int n;
   cin >> n;
 
