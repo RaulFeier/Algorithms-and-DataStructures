@@ -8,7 +8,7 @@ private:
 public:
   UnionFind(i64 n) {
     p.assign(n, 0);
-    for (i64 i : range(n))
+    for (i64 i = 0; i < n; i++)
       p[i] = i;
     rank.assign(n, 0);
     setSize.assign(n, 1);

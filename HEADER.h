@@ -1,139 +1,178 @@
-#define My_Header
+#ifndef __AHA__HEADER
+#define __AHA__HEADER
 
 #include <bits/stdc++.h>
 
-using namespace std;
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
 
+using namespace std;
+using namespace __gnu_pbds;
+
+#define let auto
+#define g0 get<0>
+#define g1 get<1>
+#define g2 get<2>
 #define ft first
 #define sd second
-#define sz(x) x.size()
-#define pb(x) push_back(x)
-#define pf(x) push_front(x)
-#define pp(x) pop_back(x)
-#define ppf(x) pop_front(x)
-#define all(x) x.begin(), x.end()
-#define srt(x) x.begin(), x.end()
-#define rvs(x) revers(all(x))
+#define sz(x) (i64) x.size()
+#define col(x) x.begin(), x.end()
+#define srt(x) sort(x.begin(), x.end())
+#define rsrt(x) sort(x.rbegin(), x.rend())
+#define rvs(x) reverse(x.begin(), x.end())
 
-// functions
-#define rep(n) for (long long i = 0; i < n; i++)
-#define factorial(n, mod)                                                      \
-  if (n > 1)                                                                   \
-    return (n * factorial(n - 1, mod)) % mod;                                  \
-  else                                                                         \
-    return 1;
-#define gcd(a, b) __gcd(a, b)
-#define lcm(a, b) return (a * b) / gcd(a, b);
+#define pq priority_queue
+#define fn function
+#ifdef LOCAL
+#define git stauDBG_MACRO_NO_WARNING
+#include <dbg.h>
+#else
+#define dbg(...)
+#endif
+#define endl '\n'
 
-// templates
 template <typename T> using vec = vector<T>;
 template <typename T> using deq = deque<T>;
-template <typename K, typename V> using mp = map<K, V>;
+template <typename K, typename V> using umap = unordered_map<K, V>;
 
-// declarations
-using i64 = long long;
-using i32 = long;
-using i16 = short;
-using i8 = char;
+template <typename K, typename V> using hmap = cc_hash_table<K, V>;
 
-using u64 = unsigned long long;
-using u32 = unsigned long;
-using u16 = unsigned short;
-using u8 = unsigned char;
+using str = string;
 
+using byte = int8_t;
+using i32 = int32_t;
+using i64 = int64_t;
+using u32 = uint32_t;
+using u64 = uint64_t;
 using d64 = long double;
 
-using p64 = pair<i64, i64>;
 using p32 = pair<i32, i32>;
-using p16 = pair<i16, i16>;
-using p8 = pair<i8, i8>;
-
-using vi64 = vec<i64>;
-using vi32 = vec<i32>;
-using vi16 = vec<i16>;
-using vi8 = vec<i8>;
-
-using vd64 = vec<d64>;
+using p64 = pair<i64, i64>;
+using pd = pair<d64, d64>;
 
 using vb = vec<bool>;
-
-using vp64 = vec<p64>;
+using vi32 = vec<i32>;
 using vp32 = vec<p32>;
-using vp16 = vec<p16>;
-using vp8 = vec<p8>;
+using vi64 = vec<i64>;
+using vd64 = vec<d64>;
+using vp64 = vec<p64>;
+using vpd = vec<pd>;
 
+using vs = vec<str>;
 using vv = vec<vi64>;
 
-using vvp64 = vec<vp64>;
+using dp6 = deq<p64>;
+using di6 = deq<i64>;
 
-using dp64 = deq<p64>;
-using di64 = deq<i64>;
-
-using mi64 = map<i64, i64>;
-using si64 = set<i64>;
+using mi6 = map<i64, i64>;
+using mp6 = map<p64, i64>;
+using si6 = set<i64>;
+using hi6 = hmap<i64, i64>;
 
 using bs = bitset<64>;
 
-// constants
-const i64 MOD = 1e9 + 7;
-const i64 INF = 1e18;
-const i64 NINF = -1e18;
-const d64 PI = acos(-1);
+using graph = vv;
+using wgraph = vec<vp64>;
+using matrix = vv;
 
-// templates functions
+const d64 EPS = 1 / 1000000.0;
+const i64 ZERO = 0;
+const i64 _0 = ZERO;
+const i64 ONE = 1;
+const i64 _1 = ONE;
+const i64 INF = INT64_MAX / 4;
+const i64 NINF = -INF;
+
+namespace std {
+
+vector<string> split(string line) {
+  vector<string> res;
+  istringstream iss(line);
+  str crt;
+  while (iss >> crt) {
+    res.push_back(crt);
+  }
+  return res;
+}
+
+template <typename T1, typename T2> struct hash<pair<T1, T2>> {
+  std::size_t operator()(const pair<T1, T2> &pair) const noexcept {
+    return hash<T1>()(pair.first) ^ hash<T2>()(pair.second);
+  }
+};
+} // namespace std
 
 template <typename T1, typename T2>
-istream &operator>>(ifstream &stream, pair<T1, T2> &p) {
-  stream >> p.ft >> p.sd;
+istream &operator>>(istream &stream, pair<T1, T2> &p) {
+  stream >> p.ft;
+  stream >> p.sd;
   return stream;
 }
 
 template <typename T1, typename T2>
-ostream &operator<<(ofstream &stream, pair<T1, T2> &p) {
-  return stream << p.ft << p.sd;
+ostream &operator<<(ostream &stream, const pair<T1, T2> &p) {
+  return stream << p.ft << " " << p.sd;
 }
 
-template <typename T> istream &operator<<(istream &stream, vec<T> &v) {
-  for (auto &x : v)
-    stream >> x;
+template <typename T> istream &operator>>(istream &stream, vec<T> &v) {
+  if (v.empty()) {
+    u64 len;
+    stream >> len;
+    v.assign(len, T());
+  }
+  for (auto i = 0; i < sz(v); i++) {
+    stream >> v[i];
+  }
   return stream;
 }
 
-template <typename T> ostream &operator<<(ostream &stream, vec<T> &v) {
-  for (auto &x : v)
-    stream << x << " ";
+template <typename T> ostream &operator<<(ostream &stream, const vec<T> &v) {
+  if (!v.empty()) {
+    stream << v[0];
+  }
+  for (auto i = 1; i < sz(v); i++) {
+    stream << " " << v[i];
+  }
   return stream;
 }
 
-template <typename T>
-struct number_iterator : std::iterator<random_access_iterator_tag, T> {
-  T v;
-  number_iterator(T _v) : v(_v) {}
-  operator T &() { return v; }
-  T operator*() const { return v; }
-};
-template <typename T> struct number_range {
-  T b, e;
-  number_range(T b, T e) : b(b), e(e) {}
-  number_iterator<T> begin() { return b; }
-  number_iterator<T> end() { return e; }
-};
-
-template <typename T> number_range<T> range(T e) {
-  return number_range<T>(0, e);
+template <typename T> istream &operator>>(istream &stream, deq<T> &v) {
+  if (v.empty()) {
+    u64 len;
+    stream >> len;
+    v.assign(len, T());
+  }
+  for (auto i = 0; i < sz(v); i++) {
+    stream >> v[i];
+  }
+  return stream;
 }
 
-template <typename T> number_range<T> range(T s, T e) {
-  return number_range<T>(s, e);
+template <typename T> ostream &operator<<(ostream &stream, const deq<T> &v) {
+  if (!v.empty()) {
+    stream << v[0];
+  }
+  for (auto i = 1; i < sz(v); i++) {
+    stream << " " << v[i];
+  }
+  return stream;
 }
 
-inline void fast() {
-  ios_base::sync_with_stdio(0);
-  cin.tie(0);
-  cout.tie(0);
+template <typename T> inline T pop(vector<T> &stack) {
+  T top = stack.back();
+  stack.pop_back();
+  return top;
 }
 
-inline void file() {
-  ifstream cin{"input.txt"};
-  ofstream cout{"output.txt"};
+template <typename T> inline T popb(deq<T> &que) {
+  T top = que.back();
+  que.pop_back();
+  return top;
 }
+
+template <typename T> inline T popf(deq<T> &que) {
+  T top = que.front();
+  que.pop_front();
+  return top;
+}
+#endif
