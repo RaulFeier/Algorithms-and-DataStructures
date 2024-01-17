@@ -1,8 +1,8 @@
 #include "../../../HEADER.h"
 
 void bfs(const vv &g, vb &visit, i64 start_vertex) {
-  di64 q;
-  q.pb(start_vertex);
+  deq<i64> q;
+  q.push_back(start_vertex);
   visit[start_vertex] = true;
 
   while (!q.empty()) {
@@ -28,7 +28,7 @@ int main() {
     i64 a, b;
     cin >> a >> b;
 
-    g[a].pb(b);
+    g[a].push_back(b);
   }
 
   vb visit(n, false);
