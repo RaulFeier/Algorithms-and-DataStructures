@@ -84,17 +84,6 @@ const i64 INF = INT64_MAX / 4;
 const i64 NINF = -INF;
 
 namespace std {
-
-vector<string> split(string line) {
-  vector<string> res;
-  istringstream iss(line);
-  str crt;
-  while (iss >> crt) {
-    res.push_back(crt);
-  }
-  return res;
-}
-
 template <typename T1, typename T2> struct hash<pair<T1, T2>> {
   std::size_t operator()(const pair<T1, T2> &pair) const noexcept {
     return hash<T1>()(pair.first) ^ hash<T2>()(pair.second);
