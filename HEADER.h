@@ -61,13 +61,13 @@ using vpd = vec<pd>;
 using vs = vec<str>;
 using vv = vec<vi64>;
 
-using dp6 = deq<p64>;
-using di6 = deq<i64>;
+using dp64 = deq<p64>;
+using di64 = deq<i64>;
 
-using mi6 = map<i64, i64>;
-using mp6 = map<p64, i64>;
-using si6 = set<i64>;
-using hi6 = hmap<i64, i64>;
+using mi64 = map<i64, i64>;
+using mp64 = map<p64, i64>;
+using si64 = set<i64>;
+using hi64 = hmap<i64, i64>;
 
 using bs = bitset<64>;
 
@@ -82,6 +82,7 @@ const i64 ONE = 1;
 const i64 _1 = ONE;
 const i64 INF = INT64_MAX / 4;
 const i64 NINF = -INF;
+const i64 MOD = 1e9 + 7;
 
 namespace std {
 template <typename T1, typename T2> struct hash<pair<T1, T2>> {
