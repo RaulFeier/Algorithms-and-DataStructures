@@ -81,8 +81,6 @@ public:
 };
 
 int main() {
-  fast();
-
   int n;
   cin >> n;
 
