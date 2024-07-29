@@ -1,18 +1,20 @@
-#include "../HEADER.h"
+#include <bits/stdc++.h>
+
+using namespace std;
 
 class ftree {
 private:
-  vi64 ft;
+  vector<int> ft;
 
-  i64 lsbl(i64 x) { return x & (-x); }
+  int lsbl(int x) { return x & (-x); }
 
 public:
-  ftree(i64 n) {
+  ftree(int n) {
     ft.assign(n + 1, 0); // if index from 0 add 1
   }
 
-  void update(i64 i, i64 val) {
-    i64 crt = i + 1; // add 1 index from 0
+  void update(int i, int val) {
+    int crt = i + 1; // add 1 index from 0
 
     while (crt < ft.size()) {
       ft[crt] += val;
@@ -20,10 +22,10 @@ public:
     }
   }
 
-  i64 sum(i64 from) {
+  int sum(int from) {
     from += 1; // add 1 index from 0
 
-    i64 sum = 0;
+    int sum = 0;
     while (from > 0) {
       sum += ft[from];
       from -= lsbl(from);
@@ -32,11 +34,11 @@ public:
     return sum;
   }
 
-  i64 sum(i64 from, i64 to) { return sum(to) - sum(from); }
+  int sum(int from, int to) { return sum(to) - sum(from); }
 };
 
 int main() {
-  i64 n;
+  int n;
   cin >> n;
 
   ftree f(n);

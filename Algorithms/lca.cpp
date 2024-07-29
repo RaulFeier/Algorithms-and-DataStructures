@@ -1,4 +1,6 @@
-#include "../../../HEADER.h"
+#include <bits/stdc++.h>
+
+using namespace std;
 
 class SegmentTree {
 private:
@@ -56,7 +58,7 @@ public:
 vector<int> first, height, in_out;
 vector<bool> visited;
 
-void dfs(graph &adj, i64 node, i64 h) {
+void dfs(vector<vector<int>> &adj, int node, int h) {
   visited[node] = true;
   height[node] = h;
   first[node] = in_out.size();
@@ -74,7 +76,7 @@ int main() {
   int n, m;
   cin >> n >> m;
 
-  graph g(n);
+  vector<vector<int>> g(n);
 
   for (int i = 0; i < m; i++) {
     int u, v;

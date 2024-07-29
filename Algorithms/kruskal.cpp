@@ -1,24 +1,34 @@
-#include "../../../../HEADER.h"
+#include <bits/stdc++.h>
+
+using namespace std;
 
 class UnionFind {
 private:
-  vi64 p, rank;
+  vector<int> p, rank;
 
 public:
-  UnionFind(i64 n) {
+  UnionFind(int n) {
     p.assign(n, 0);
-    for (i64 i = 0; i < n; i++)
-      p[i] = i;
+    iota(p.begin(), p.end(), 0);
     rank.assign(n, 0);
   }
 
-  i64 findSet(i64 i) { return (p[i] == i) ? i : (p[i] = findSet(p[i])); }
+  int findSet(int i) {
+    int t = i;
+    while (p[i] != i) {
+      i = p[i];
+    }
+    if (t != i) {
+      p[t] = i;
+    }
+    return i;
+  }
   bool isSameSet(int i, int j) { return findSet(i) == findSet(j); }
 
   void unionSet(int i, int j) {
     if (isSameSet(i, j))
       return;
-    i64 x = findSet(i), y = findSet(j);
+    int x = findSet(i), y = findSet(j);
     if (rank[x] > rank[y])
       swap(x, y);
     p[x] = y;
@@ -28,13 +38,13 @@ public:
 };
 
 int main() {
-  i64 n, m;
+  int n, m;
   cin >> n >> m;
 
-  vector<tuple<i64, i64, i64>> mst(n);
-  for (i64 i = 0; i < m; i++) {
-    i64 w, u, v;
-    cin >> w >> u >> v;
+  vector<tuple<int, int, int>> mst(n);
+  for (int i = 0; i < m; i++) {
+    int u, v, w;
+    cin >> u >> v >> w;
 
     mst[i] = {w, u, v};
   }
@@ -42,11 +52,11 @@ int main() {
   sort(mst.begin(), mst.end()); // sort by weight, tuple has builtin comparation
                                 // func, O(N log N)
 
-  i64 mnt_cost, num_taken = 0;
+  int mnt_cost, num_taken = 0;
 
   UnionFind UF(n);
 
-  for (let & [ w, u, v ] : mst) {
+  for (auto &[w, u, v] : mst) {
     if (UF.isSameSet(u, v))
       continue;
     mnt_cost += w;

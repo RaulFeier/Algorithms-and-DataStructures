@@ -1,29 +1,39 @@
-#include "../HEADER.h"
+#include <bits/stdc++.h>
+
+using namespace std;
 
 class UnionFind {
 private:
-  vi64 p, rank, setSize;
-  i64 numSets;
+  vector<int> p, rank, setSize;
+  int numSets;
 
 public:
-  UnionFind(i64 n) {
+  UnionFind(int n) {
     p.assign(n, 0);
-    for (i64 i = 0; i < n; i++)
-      p[i] = i;
+    iota(p.begin(), p.end(), 0);
     rank.assign(n, 0);
     setSize.assign(n, 1);
     numSets = n;
   }
 
-  i64 findSet(i64 i) { return (p[i] == i) ? i : (p[i] = findSet(p[i])); }
+  int findSet(int i) {
+    int t = i;
+    while (p[i] != i) {
+      i = p[i];
+    }
+    if (t != i) {
+      p[t] = i;
+    }
+    return i;
+  }
   bool isSameSet(int i, int j) { return findSet(i) == findSet(j); }
-  i64 numDisjointSets() { return numSets; }
-  i64 sizeOfSet(i64 i) { return setSize[findSet(i)]; }
+  int numDisjointSets() { return numSets; }
+  int sizeOfSet(int i) { return setSize[findSet(i)]; }
 
   void unionSet(int i, int j) {
     if (isSameSet(i, j))
       return;
-    i64 x = findSet(i), y = findSet(j);
+    int x = findSet(i), y = findSet(j);
     if (rank[x] > rank[y])
       swap(x, y);
     p[x] = y;
