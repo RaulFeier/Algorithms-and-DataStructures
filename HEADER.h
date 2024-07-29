@@ -34,7 +34,6 @@ using namespace __gnu_pbds;
 template <typename T> using vec = vector<T>;
 template <typename T> using deq = deque<T>;
 template <typename K, typename V> using umap = unordered_map<K, V>;
-
 template <typename K, typename V> using hmap = cc_hash_table<K, V>;
 
 using str = string;
@@ -69,8 +68,6 @@ using mp64 = map<p64, i64>;
 using si64 = set<i64>;
 using hi64 = hmap<i64, i64>;
 
-using bs = bitset<64>;
-
 using graph = vv;
 using wgraph = vec<vp64>;
 using matrix = vv;
@@ -83,14 +80,6 @@ const i64 _1 = ONE;
 const i64 INF = INT64_MAX / 4;
 const i64 NINF = -INF;
 const i64 MOD = 1e9 + 7;
-
-namespace std {
-template <typename T1, typename T2> struct hash<pair<T1, T2>> {
-  std::size_t operator()(const pair<T1, T2> &pair) const noexcept {
-    return hash<T1>()(pair.first) ^ hash<T2>()(pair.second);
-  }
-};
-} // namespace std
 
 template <typename T1, typename T2>
 istream &operator>>(istream &stream, pair<T1, T2> &p) {
@@ -124,45 +113,5 @@ template <typename T> ostream &operator<<(ostream &stream, const vec<T> &v) {
     stream << " " << v[i];
   }
   return stream;
-}
-
-template <typename T> istream &operator>>(istream &stream, deq<T> &v) {
-  if (v.empty()) {
-    u64 len;
-    stream >> len;
-    v.assign(len, T());
-  }
-  for (auto i = 0; i < sz(v); i++) {
-    stream >> v[i];
-  }
-  return stream;
-}
-
-template <typename T> ostream &operator<<(ostream &stream, const deq<T> &v) {
-  if (!v.empty()) {
-    stream << v[0];
-  }
-  for (auto i = 1; i < sz(v); i++) {
-    stream << " " << v[i];
-  }
-  return stream;
-}
-
-template <typename T> inline T pop(vector<T> &stack) {
-  T top = stack.back();
-  stack.pop_back();
-  return top;
-}
-
-template <typename T> inline T popb(deq<T> &que) {
-  T top = que.back();
-  que.pop_back();
-  return top;
-}
-
-template <typename T> inline T popf(deq<T> &que) {
-  T top = que.front();
-  que.pop_front();
-  return top;
 }
 #endif
