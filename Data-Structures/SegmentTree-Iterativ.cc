@@ -1,103 +1,60 @@
-#include "../HEADER.h"
+#include <bits/stdc++.h>
 
-int power_of_two(int n) {
-  int crt = 1;
-  while (crt < n) {
-    crt *= 2;
+using namespace std;
+
+const int max_N = 200000;
+int t[max_N + 5];
+int N; // size of the vector;
+
+void build(vector<int> &v) {
+  for (int i = 0; i < v.size(); i++) {
+    t[i + N] = v[i];
   }
 
-  return crt * 2;
+  int start = N / 2;
+  int end = N;
+
+  while (start > 0) {
+    for (int i = start - 1; i < end; i++) {
+      t[i] = min(t[i * 2], t[i * 2 + 1]);
+    }
+
+    start /= 2;
+    end /= 2;
+  }
 }
 
-class SegmentTree {
-private:
-  int n;
-  vector<int> tree;
-  int len;
+void update(int pos, int val) {
+  pos += N - 1;
+  t[pos] = val;
 
-  void build(vector<int> &tree) {
-    for (int i = 0; i < n; i++) {
-      this->tree[i + len] = tree[i];
-    }
+  pos /= 2;
 
-    int start = len / 2;
-    int end = len;
-    while (start != 0) {
-      for (int index = start - 1; index < end; index++) {
-        this->tree[index] =
-            max(this->tree[index * 2], this->tree[index * 2 + 1]);
-      }
-      start /= 2;
-      end /= 2;
-    }
+  while (pos > 0) {
+    t[pos] = max(t[pos * 2], t[pos * 2 + 1]);
+    pos /= 2;
   }
-
-public:
-  SegmentTree(vector<int> &tree) {
-    n = tree.size();
-    this->tree.resize(power_of_two(tree.size()), 0);
-    len = this->tree.size() / 2;
-    build(tree);
-  }
-
-  void update(int pos, int value) {
-    pos = pos + len - 1;
-    this->tree[pos] = value;
-
-    pos = pos / 2;
-    while (pos != 0) {
-      this->tree[pos] = max(this->tree[pos * 2], this->tree[pos * 2 + 1]);
-      pos /= 2;
-    }
-  }
-
-  int query(int l, int r) {
-    l = l + len - 1;
-    r = r + len - 1;
-    int res = -1;
-
-    while (l <= r) {
-      if (l % 2 == 1) {
-        res = max(res, this->tree[l]);
-        l++;
-      }
-      if (r % 2 == 0) {
-        res = max(res, this->tree[r]);
-        r--;
-      }
-      r /= 2;
-      l /= 2;
-    }
-
-    return res;
-  }
-
-  void print_tree() {
-    for (int index = 1; index < this->tree.size(); index++) {
-      cout << this->tree[index] << " ";
-    }
-    cout << endl;
-  }
-};
-
-int main() {
-  int n;
-  cin >> n;
-
-  vector<int> tree(n);
-
-  for (int i = 0; i < n; i++) {
-    cin >> tree[i];
-  }
-
-  SegmentTree CopilCopac(tree);
-
-  return 0;
 }
 
-/*
-       10
-   10       1
- 10   6   1   0
-4 10 5 6 1 0 0 0
-*/
+int query(int l, int r) {
+  l += N - 1;
+  r += N - 1;
+
+  int res = -1;
+  while (l <= r) {
+    if (l % 2 == 1) {
+      res = max(res, t[l]);
+      l++;
+    }
+
+    if (r % 2 == 0) {
+      res = max(res, t[r]);
+      r--;
+    }
+
+    l /= 2;
+    r /= 2;
+  }
+
+  return res;
+}

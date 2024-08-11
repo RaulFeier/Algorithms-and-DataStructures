@@ -26,6 +26,7 @@ public:
     }
     return i;
   }
+
   bool isSameSet(int i, int j) { return findSet(i) == findSet(j); }
   int numDisjointSets() { return numSets; }
   int sizeOfSet(int i) { return setSize[findSet(i)]; }
