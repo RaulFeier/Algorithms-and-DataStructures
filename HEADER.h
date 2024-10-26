@@ -16,10 +16,10 @@ using namespace __gnu_pbds;
 #define ft first
 #define sd second
 #define sz(x) (i64) x.size()
-#define col(x) x.begin(), x.end()
 #define srt(x) sort(x.begin(), x.end())
 #define rsrt(x) sort(x.rbegin(), x.rend())
 #define rvs(x) reverse(x.begin(), x.end())
+#define all(x) x.begin(), x.end()
 
 #define pq priority_queue
 #define fn function
@@ -114,4 +114,12 @@ template <typename T> ostream &operator<<(ostream &stream, const vec<T> &v) {
   }
   return stream;
 }
+
+struct hash_pair {
+  template <class T1, class T2> size_t operator()(const pair<T1, T2> &p) const {
+    size_t hash1 = hash<T1>{}(p.first);
+    size_t hash2 = hash<T2>{}(p.second);
+    return hash1 ^ (hash2 + 0x9e3779b9 + (hash1 << 6) + (hash1 >> 2));
+  }
+};
 #endif

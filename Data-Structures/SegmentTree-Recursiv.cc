@@ -60,9 +60,10 @@ void query_lazy(int node, int l, int r, int a, int b, int &val) {
   propagate(node, l, r);
   if (a <= l && r <= b) {
     val = min(val, t[node]);
+    return;
   }
-  int mid = (l + r) / 2;
 
+  int mid = (l + r) / 2;
   if (a <= mid) {
     query_lazy(node * 2, l, mid, a, b, val);
   }
