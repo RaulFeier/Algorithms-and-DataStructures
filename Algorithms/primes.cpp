@@ -2,15 +2,16 @@
 
 using namespace std;
 
+using i64 = long long;
 bitset<10000010> bs;
 vector<int> p;
 
 void sieve(int N) {
   bs[0] = bs[1] = 0;
 
-  for (int i = 2; i < N + 1; i++) {
+  for (i64 i = 2; i < N + 1; i++) {
     if (bs[i]) {
-      for (int j = i * i; j < N + 1; j += i) {
+      for (i64 j = i * i; j < N + 1; j += i) {
         bs[j] = 0;
       }
       p.push_back(i);

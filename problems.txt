@@ -2,3 +2,23 @@ dp:
 https://codeforces.com/problemset/problem/455/A
 https://codeforces.com/contest/977/problem/F
 https://codeforces.com/contest/478/problem/D
+https://codeforces.com/contest/2031/problem/D
+
+problems with vectors 1d and 2d:
+https://www.pbinfo.ro/probleme/535/fabrica
+https://www.pbinfo.ro/probleme/2220/difmax
+https://www.pbinfo.ro/probleme/3796/qtsume
+https://www.pbinfo.ro/probleme/297/secvsummax
+https://www.pbinfo.ro/probleme/3499/secv011
+https://www.pbinfo.ro/probleme/3410/submatrixsummax
+https://www.pbinfo.ro/probleme/1687/omogene
+https://www.pbinfo.ro/probleme/1104/qvect
+https://www.pbinfo.ro/probleme/1673/cmmdc1
+https://www.pbinfo.ro/probleme/3290/matd3
+https://www.pbinfo.ro/probleme/4529/secvkdistincte
+https://www.pbinfo.ro/probleme/3163/secvmaxval
+https://www.pbinfo.ro/probleme/4654/kmajo
+https://www.pbinfo.ro/probleme/1080/livada
+
+binary search:
+https://www.pbinfo.ro/probleme/536/fabrica1
