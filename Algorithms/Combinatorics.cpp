@@ -35,6 +35,16 @@ int comb(int n, int k) {
   return (1ll * fact[n] * ifact[n - k]) % MOD * ifact[k] % MOD;
 }
 
+int lucas(int n, int k) {
+  if (n == k)
+    return 1;
+
+  int ni = n % MOD;
+  int ki = k % MOD;
+
+  return 1ll * comb(ni, ki) * lucas(n / MOD, k / MOD) % MOD;
+} // if MOD smaller then N
+
 int main() {
   PreProces();
 
