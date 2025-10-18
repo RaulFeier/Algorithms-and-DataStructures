@@ -24,9 +24,11 @@ private:
 public:
   segtree(int N) { tree.assign(4 * N + 4, T()); }
 
+  T get_elem(int pos) { return tree[pos]; }
+
   void update(int node, int l, int r, int pos, int elem) {
     if (l == r) {
-      tree[node] = elem;
+      tree[node].elem = elem;
       return;
     }
 
@@ -47,8 +49,11 @@ int main() {
   cout.tie(0);
 
   segtree<Node> aint(5);
+  aint.update(1, 1, 5, 3, 3);
 
   for (int i = 1; i <= 20; i++) {
+    Node a = aint.get_elem(i);
+    cout << a.elem << '\n';
   }
 
   return 0;
