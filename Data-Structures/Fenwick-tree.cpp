@@ -58,6 +58,7 @@ public:
            range_query(x1 - 1, y2) + range_query(x1 - 1, y1 - 1);
   }
 };
+
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(0);
