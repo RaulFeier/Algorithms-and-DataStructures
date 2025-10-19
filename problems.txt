@@ -14,7 +14,7 @@ https://codeforces.com/contest/2031/problem/D - https://codeforces.com/contest/2
 https://codeforces.com/contest/2162/problem/H
 
 // pbinfo
-https://www.pbinfo.ro/probleme/535/fabrica
+https://www.pbinfo.ro/probleme/535/fabrica - https://www.pbinfo.ro/detalii-evaluare/53028305
 https://www.pbinfo.ro/probleme/2220/difmax
 https://www.pbinfo.ro/probleme/3796/qtsume
 https://www.pbinfo.ro/probleme/297/secvsummax
