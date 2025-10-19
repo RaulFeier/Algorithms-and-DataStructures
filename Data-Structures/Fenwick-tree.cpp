@@ -43,7 +43,7 @@ public:
   }
 
   T range_query(int x, int y) {
-    int sum = 0;
+    T sum = 0;
     for (int i = x; i > 0; i -= (i & (-i))) {
       for (int j = y; j > 0; j -= (j & (-j))) {
         sum += tree[i][j];
