@@ -1,5 +1,4 @@
 #include <bits/stdc++.h>
-#include <fstream>
 
 using namespace std;
 
@@ -12,10 +11,8 @@ public:
     st.resize(a.size() + 1, vector<int>(20)); // 0 indexed array
 
     for (int i = 0; i < a.size(); i++) {
-      // cout << a[i] << " ";
       st[i + 1][0] = a[i];
     }
-    // cout << '\n';
 
     for (int j = 1; j < 20; j++) {
       for (int i = 1; i + (1 << j) - 1 <= a.size(); i++) {
