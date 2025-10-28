@@ -12,6 +12,8 @@ https://codeforces.com/contest/977/problem/F - https://codeforces.com/contest/97
 https://codeforces.com/contest/478/problem/D
 https://codeforces.com/contest/2031/problem/D - https://codeforces.com/contest/2031/submission/291683492
 https://codeforces.com/contest/2162/problem/H
+https://codeforces.com/contest/600/problem/E - https://codeforces.com/contest/600/submission/345373219
+https://codeforces.com/contest/1051/problem/F - https://codeforces.com/contest/1051/submission/346072641
 
 // pbinfo
 https://www.pbinfo.ro/probleme/535/fabrica - https://www.pbinfo.ro/detalii-evaluare/53028305
