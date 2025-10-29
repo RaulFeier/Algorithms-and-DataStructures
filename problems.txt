@@ -5,6 +5,8 @@ https://kilonova.ro/problems/299?list_id=76
 
 // infoarena
 https://www.infoarena.ro/problema/delay - https://www.infoarena.ro/job_detail/3316527?action=view-source
+https://www.infoarena.ro/problema/plantatie - https://www.infoarena.ro/job_detail/3318847
+https://www.infoarena.ro/problema/rmq - https://www.infoarena.ro/job_detail/3318787
 
 // codeforces
 https://codeforces.com/problemset/problem/455/A - https://codeforces.com/contest/455/submission/301021172
