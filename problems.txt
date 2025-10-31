@@ -2,6 +2,7 @@
 https://kilonova.ro/problems/305?list_id=76 -
 https://kilonova.ro/problems/303?list_id=76
 https://kilonova.ro/problems/299?list_id=76
+https://kilonova.ro/problems/619 - https://kilonova.ro/submissions/819982
 
 // infoarena
 https://www.infoarena.ro/problema/delay - https://www.infoarena.ro/job_detail/3316527?action=view-source
