@@ -34,6 +34,7 @@ https://www.pbinfo.ro/probleme/3163/secvmaxval
 https://www.pbinfo.ro/probleme/4654/kmajo
 https://www.pbinfo.ro/probleme/1080/livada
 https://www.pbinfo.ro/probleme/536/fabrica1
+https://www.pbinfo.ro/probleme/3883/comisia - https://www.pbinfo.ro/detalii-evaluare/60652593
 
 // usaco (cant add solution)
 https://usaco.org/index.php?page=viewproblem2&cpid=995 - done
