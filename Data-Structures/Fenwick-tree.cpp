@@ -9,14 +9,14 @@ private:
 public:
   BIT1D(int N) { tree.assign(N + 1, 0); }
 
-  void update(int pos, int val) {
-    for (int i = pos; i <= tree.size(); i += (i & (-i))) {
+  void update(int pos, T val) {
+    for (int i = pos; i < (int)tree.size(); i += (i & (-i))) {
       tree[i] += val;
     }
   }
 
   T range_query(int pos) {
-    int sum = 0;
+    T sum = 0;
     for (int i = pos; i > 0; i -= (i & (-i))) {
       sum += tree[i];
     }
@@ -35,8 +35,8 @@ public:
   BIT2D(int N, int M) { tree.assign(N + 1, vector<T>(M + 1, 0)); }
 
   void update(int x, int y, int val) {
-    for (int i = x; i <= tree.size(); i += (i & (-i))) {
-      for (int j = y; j <= tree[0].size(); j += (j & (-j))) {
+    for (int i = x; i < tree.size(); i += (i & (-i))) {
+      for (int j = y; j < tree[0].size(); j += (j & (-j))) {
         tree[i][j] += val;
       }
     }

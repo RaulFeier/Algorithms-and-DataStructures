@@ -1,3 +1,4 @@
+// https://cses.fi/problemset/task/1675
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -38,11 +39,15 @@ public:
 };
 
 int main() {
-  int n, m;
-  cin >> n >> m;
+  ios::sync_with_stdio(false);
+  cin.tie(0);
+  cout.tie(0);
 
-  vector<tuple<int, int, int>> mst(n);
-  for (int i = 0; i < m; i++) {
+  int N, M;
+  cin >> N >> M;
+
+  vector<tuple<int, int, int>> mst(N);
+  for (int i = 0; i < M; i++) {
     int u, v, w;
     cin >> u >> v >> w;
 
@@ -54,7 +59,7 @@ int main() {
 
   int mnt_cost, num_taken = 0;
 
-  UnionFind UF(n);
+  UnionFind UF(N);
 
   for (auto &[w, u, v] : mst) {
     if (UF.isSameSet(u, v))
@@ -62,11 +67,11 @@ int main() {
     mnt_cost += w;
     UF.unionSet(u, v);
     ++num_taken;
-    if (num_taken == n - 1)
+    if (num_taken == N - 1)
       break; // optimization
   }
 
-  cout << mnt_cost << endl;
+  cout << mnt_cost << '\n';
 
   return 0;
 }
