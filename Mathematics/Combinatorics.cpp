@@ -43,7 +43,31 @@ int lucas(int n, int k) {
   int ki = k % MOD;
 
   return 1ll * comb(ni, ki) * lucas(n / MOD, k / MOD) % MOD;
-} // if MOD smaller then N
+} // if MOD smaller then N and MOD prime
+
+int Catalan(int n) {
+  return 1ll * bpow((n + 1), MOD - 2) * comb(2 * n, n) % MOD;
+}
+/*
+http://www.geometer.org/mathcircles/catalan.pdf
+Number of correct bracket sequence consisting of N opening and N closing
+brackets.
+The number of rooted full binary trees with N + 1 leaves (vertices are
+not numbered). A rooted binary tree is full if every vertex has either two
+children or no children.
+The number of ways to completely parenthesize N + 1 factors.
+The number of triangulations of a convex polygon with N + 2 sides (i.e. the
+number of partitions of polygon into disjoint triangles by using the diagonals).
+The number of ways to connect the 2N points on a circle to form N disjoint
+chords.
+*/
+
+int Bell_numbers(int n) {
+  // Bn = Sum from i=0 to n-1 (comb(n - 1, i) * Bi);
+}
+/*
+Bell number is the sum from k=0 to N, Stirling_2[N][k]
+ */
 
 int main() {
   PreProces();
