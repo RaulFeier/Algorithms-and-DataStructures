@@ -2,64 +2,40 @@
 
 using namespace std;
 
-class trie {
-private:
-  struct Node_trie {
-    int val, cnt;
-    Node_trie *p[26];
+class Trie {
+public:
+  vector<vector<int>> tree;
+  vector<bool> final_word;
+  int next_node;
 
-    Node_trie() {
-      for (int i = 0; i < 26; i++)
-        p[i] = NULL;
-
-      val = 0;
-      cnt = 0;
-    }
-  };
-
-  Node_trie *root;
-
-  trie(int N) { root = new Node_trie(); }
+  Trie(int N) {
+    tree.assign(N, vector<int>(26, 0));
+    final_word.assign(N, false);
+    next_node = 0;
+  }
 
   void insert(string &s) {
-    Node_trie *cur = root;
+    int node = 0; // start node
+    for (auto &c : s) {
+      if (tree[node][c - 'a'] == 0)
+        tree[node][c - 'a'] = ++next_node;
 
-    for (int i = 0; i < s.size(); i++) {
-      int nr = s[0] - 'a';
-
-      if (cur->p[nr] == NULL)
-        cur->p[nr] = new Node_trie();
-
-      cur = cur->p[nr];
-      cur->cnt++;
+      node = tree[node][c - 'a'];
     }
+
+    final_word[node] = true;
   }
 
-  void erase(string &s) {
-    Node_trie *cur = root;
+  bool search(string &s) {
+    int node = 0;
+    for (auto &c : s) {
+      if (tree[node][c - 'a'] == 0)
+        return false; // the prefix doesnt exist
 
-    for (int i = 0; i < s.size(); i++) {
-      int nr = s[0] - 'a';
-
-      Node_trie *next = new Node_trie();
-      next = cur->p[nr];
-
-      next->cnt--;
-      if (next->cnt == 0) {
-        delete next;
-        cur->p[nr] = NULL;
-        return;
-      }
-
-      cur = next;
+      node = tree[node][c - 'a'];
     }
-  }
 
-  int search(string &s) {
-    Node_trie *cur = root;
-
-    for (int i = 0; i < s.size(); i++) {
-    }
+    return true;
   }
 };
 
