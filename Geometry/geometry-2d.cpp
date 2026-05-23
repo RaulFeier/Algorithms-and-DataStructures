@@ -29,6 +29,7 @@ struct Point {
   }
 };
 
+namespace double_point {
 double euclidean_dist(const Point &a, const Point &b) { // return dist^2
   return (a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y);
 }
@@ -42,6 +43,14 @@ bool colinear(Point a, Point b, Point c) {
              a.x * c.y ==
          0;
 }
+
+// standing at point a facing point b if c is on the right then the formula is
+// negative and it turns clock_wise, if the formula is positive it turn
+// trigonometric way
+bool clock_wise(Point a, Point b, Point c) {
+  return (c.y - a.y) * (b.x - a.x) - (c.x - a.x) * (b.y - a.y) < 0;
+}
+} // namespace double_point
 
 // line stuff
 
@@ -118,6 +127,11 @@ int main() {
   ios::sync_with_stdio(false);
   cin.tie(0);
   cout.tie(0);
+
+  Point a, b, c;
+  cin >> a >> b >> c;
+
+  bool ok = double_point::clock_wise(a, b, c);
 
   return 0;
 }
