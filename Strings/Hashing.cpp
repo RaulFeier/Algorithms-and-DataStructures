@@ -5,7 +5,7 @@ using i64 = long long;
 
 mt19937 rng((uint32_t)chrono::steady_clock::now().time_since_epoch().count());
 
-const i64 MOD = 1e9 + 7; // or (1LL << 61) - 1
+const i64 MOD = 1e9 + 7; // or (1LL << 61) - 1 or 999999999999989
 const i64 B = uniform_int_distribution<i64>(31, MOD - 1)(rng);
 
 class Hashing {
