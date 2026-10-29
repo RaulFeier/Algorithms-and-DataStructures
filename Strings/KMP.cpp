@@ -2,49 +2,46 @@
 
 using namespace std;
 
-const int N_MAX = 200010;
+// p[i] = len, the length of the longest prefix that matches a subtring that
+// ends at position i
+vector<int> prefix_function(string &s) {
+  vector<int> p((int)s.size());
+  p[0] = 0;
 
-string P, T; // here we look for P in T
-int N, M;
+  for (int i = 1; i < (int)s.size(); i++) {
+    int j = p[i - 1];
 
-int b[N_MAX];
+    while (j > 0 && s[i] != s[j]) {
+      j = p[j - 1];
+    }
 
-void kmpPreprocess() {
-  int i = 1, j = 0;
-  b[0] = 0;
-
-  while (i < M) {
-    while ((j > 0) && (P[i] != P[j]))
-      j = b[j - 1];
-
-    if (P[i] == P[j])
+    if (s[i] == s[j])
       j++;
 
-    b[i] = j;
-    i++;
+    p[i] = j;
   }
+
+  return p;
 }
 
-int kmpSearch() {
-  int freq = 0;
-  int i = 0, j = 0;
+// how manny times S occurs in T
+int kmpSearch(vector<int> &prefix_s, string &T, string &P) {
+  int j = 0, cnt = 0;
 
-  while (i < N) {
-    while ((j > 0) && (T[i] != P[j]))
-      j = b[j - 1];
+  for (int i = 0; i < (int)T.size(); i++) {
+    while (j > 0 && T[i] != P[j])
+      j = prefix_s[j - 1];
 
     if (T[i] == P[j])
       j++;
 
-    i++;
-
-    if (j == M) {
-      freq++;
-      j = b[j - 1];
+    if (j == (int)P.size()) {
+      cnt++;
+      j = prefix_s[j - 1];
     }
   }
 
-  return freq;
+  return cnt;
 }
 
 int main() {
@@ -52,17 +49,11 @@ int main() {
   cin.tie(0);
   cout.tie(0);
 
-  cin >> T >> P;
-  M = P.size();
-  N = T.size();
-  kmpPreprocess();
+  string S = "aabaab";
+  string T = "aabaabaabaab";
 
-  for (int i = 0; i < M; i++) {
-    cout << b[i] << " ";
-  }
-  cout << '\n';
-
-  cout << kmpSearch() << '\n';
+  auto p = prefix_function(S);
+  cout << kmpSearch(p, T, S) << '\n';
 
   return 0;
 }
