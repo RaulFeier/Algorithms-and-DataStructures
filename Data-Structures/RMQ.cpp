@@ -8,22 +8,22 @@ private:
 
 public:
   RMQ(vector<int> &a) {
-    st.resize(a.size() + 1, vector<int>(20)); // 0 indexed array
+    st.resize(20, vector<int>(a.size() + 1)); // 0 indexed array
 
     for (int i = 0; i < a.size(); i++) {
-      st[i + 1][0] = a[i];
+      st[0][i + 1] = a[i];
     }
 
     for (int j = 1; j < 20; j++) {
       for (int i = 1; i + (1 << j) - 1 <= a.size(); i++) {
-        st[i][j] = min(st[i][j - 1], st[i + (1 << (j - 1))][j - 1]);
+        st[j][i] = min(st[j - 1][i], st[j - 1][i + (1 << (j - 1))]);
       }
     }
   }
 
   int querie(int L, int R) {
     int j = 31 - __builtin_clz(R - L + 1);
-    return min(st[L][j], st[R - (1 << j) + 1][j]);
+    return min(st[j][L], st[j][R - (1 << j) + 1]);
   }
 };
 
