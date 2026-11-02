@@ -1,60 +1,83 @@
 #include <bits/stdc++.h>
 
 using namespace std;
+using i64 = long long;
 
-class Node {
-private:
-public:
-  int elem;
+struct Node {
+  i64 val;
+  i64 freq;
 
-  Node() { elem = 1e9; }
+  Node() { val = 0, freq = 0; }
 
-  Node combine(Node a, Node b) {
-    if (a.elem > b.elem)
-      return b;
-
-    return a;
+  Node(int val, int freq) {
+    this->val = val;
+    this->freq = freq;
   }
 };
 
-template <class T> class segtree {
+Node combine(Node a, Node b) {
+  if (a.val < b.val)
+    return a;
+  else if (a.val > b.val)
+    return b;
+  else
+    return Node(a.val, a.freq + b.freq);
+}
+
+template <typename T> class Segtree {
 private:
   vector<T> tree;
+  int N;
 
-public:
-  segtree(int N) { tree.assign(4 * N + 4, T()); }
-
-  T get_elem(int pos) { return tree[pos]; }
-
-  void update(int node, int l, int r, int pos, int elem) {
+  void update(int node, int l, int r, int pos, i64 val) {
     if (l == r) {
-      tree[node].elem = elem;
+      tree[node].val = val;
+      tree[node].freq = 1;
       return;
     }
 
-    int mid = (l + r) / 2;
+    int mid = (l + r) >> 1;
     if (pos <= mid) {
-      update(node * 2, mid, l, pos, elem);
+      update(node << 1, l, mid, pos, val);
     } else {
-      update(node * 2 + 1, mid + 1, r, pos, elem);
+      update((node << 1) + 1, mid + 1, r, pos, val);
     }
 
-    tree[node] = combine(tree[node * 2], tree[node * 2 + 1]);
+    tree[node] = combine(tree[node << 1], tree[(node << 1) + 1]);
   }
+
+  T query(int node, int l, int r, int a, int b) {
+    if (a <= l && r <= b) {
+      return tree[node];
+    }
+
+    int mid = (l + r) >> 1;
+
+    T aux(1e9, 0);
+    if (a <= mid)
+      aux = combine(aux, query(node << 1, l, mid, a, b));
+
+    if (b > mid)
+      aux = combine(aux, query((node << 1) + 1, mid + 1, r, a, b));
+
+    return aux;
+  }
+
+public:
+  Segtree(int n) {
+    tree.assign(4 * n + 5, T());
+    N = n;
+  }
+
+  void update(int pos, int val) { update(1, 1, N, pos, val); }
+
+  T query(int a, int b) { return query(1, 1, N, a, b); }
 };
 
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(0);
   cout.tie(0);
-
-  segtree<Node> aint(5);
-  aint.update(1, 1, 5, 3, 3);
-
-  for (int i = 1; i <= 20; i++) {
-    Node a = aint.get_elem(i);
-    cout << a.elem << '\n';
-  }
 
   return 0;
 }
